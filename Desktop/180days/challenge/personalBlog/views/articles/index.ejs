@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>index</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mb-4">Blog Articles</h1>
+        <a href="/articles/new" class="btn btn-success">
+            New Articles
+        </a>
+        <div class="card mt-4">
+            <h2>
+                HOME
+            </h2>
+            <%=homeStartingContent %>
+        </div>
+        <% articles.forEach(function(article) { %>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4 class="class-title">
+                        <%= article.title %>
+                    </h4>
+                    <div class="card-subtitle text-muted mb-2">
+                        <%= article.date.toLocaleDateString('IST',{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %>
+                    </div>
+                    <div class="card-text mb-2">
+                        <%= article.descriptions %>
+                    </div>
+                    <a href="/articles/selected/<%= article.title %>" class="btn btn-primary">
+                        Read More
+                    </a>
+                    <form action="/articles/<%= article._id%>?_method=DELETE" class="d-inline" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+</body>
+
+</html>
